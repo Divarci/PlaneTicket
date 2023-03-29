@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection.cs" />
+    <Compile Include="DALFlights.cs" />
     <Compile Include="DALLines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
