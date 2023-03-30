@@ -64,34 +64,34 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(77, 52);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 23);
+            this.label1.Size = new System.Drawing.Size(58, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "FROM :";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(105, 86);
+            this.label2.Location = new System.Drawing.Point(99, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 23);
+            this.label2.Size = new System.Drawing.Size(36, 18);
             this.label2.TabIndex = 2;
             this.label2.Text = "TO :";
             // 
             // cmbFrom
             // 
             this.cmbFrom.FormattingEnabled = true;
-            this.cmbFrom.Location = new System.Drawing.Point(151, 48);
+            this.cmbFrom.Location = new System.Drawing.Point(140, 48);
             this.cmbFrom.Name = "cmbFrom";
-            this.cmbFrom.Size = new System.Drawing.Size(242, 31);
+            this.cmbFrom.Size = new System.Drawing.Size(253, 26);
             this.cmbFrom.TabIndex = 3;
             this.cmbFrom.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // cmbTo
             // 
             this.cmbTo.FormattingEnabled = true;
-            this.cmbTo.Location = new System.Drawing.Point(151, 82);
+            this.cmbTo.Location = new System.Drawing.Point(140, 82);
             this.cmbTo.Name = "cmbTo";
-            this.cmbTo.Size = new System.Drawing.Size(242, 31);
+            this.cmbTo.Size = new System.Drawing.Size(253, 26);
             this.cmbTo.TabIndex = 4;
             // 
             // radioButton1
@@ -100,7 +100,7 @@
             this.radioButton1.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton1.Location = new System.Drawing.Point(166, 12);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(104, 23);
+            this.radioButton1.Size = new System.Drawing.Size(87, 20);
             this.radioButton1.TabIndex = 5;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "ONE WAY";
@@ -112,7 +112,7 @@
             this.radioButton2.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioButton2.Location = new System.Drawing.Point(307, 12);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(91, 23);
+            this.radioButton2.Size = new System.Drawing.Size(75, 20);
             this.radioButton2.TabIndex = 6;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "RETURN";
@@ -121,18 +121,18 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 224);
+            this.label3.Location = new System.Drawing.Point(43, 224);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 23);
+            this.label3.Size = new System.Drawing.Size(92, 18);
             this.label3.TabIndex = 7;
             this.label3.Text = "DEP. DATE :";
             // 
             // dtpDep
             // 
             this.dtpDep.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDep.Location = new System.Drawing.Point(151, 218);
+            this.dtpDep.Location = new System.Drawing.Point(140, 218);
             this.dtpDep.Name = "dtpDep";
-            this.dtpDep.Size = new System.Drawing.Size(114, 29);
+            this.dtpDep.Size = new System.Drawing.Size(149, 25);
             this.dtpDep.TabIndex = 8;
             this.dtpDep.Value = new System.DateTime(2023, 3, 28, 21, 45, 3, 0);
             this.dtpDep.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
@@ -140,17 +140,17 @@
             // dtpReturn
             // 
             this.dtpReturn.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpReturn.Location = new System.Drawing.Point(151, 252);
+            this.dtpReturn.Location = new System.Drawing.Point(140, 252);
             this.dtpReturn.Name = "dtpReturn";
-            this.dtpReturn.Size = new System.Drawing.Size(114, 29);
+            this.dtpReturn.Size = new System.Drawing.Size(149, 25);
             this.dtpReturn.TabIndex = 10;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(5, 255);
+            this.label4.Location = new System.Drawing.Point(17, 255);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(145, 23);
+            this.label4.Size = new System.Drawing.Size(118, 18);
             this.label4.TabIndex = 9;
             this.label4.Text = "RETURN DATE :";
             // 
@@ -159,7 +159,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(73, 153);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 23);
+            this.label5.Size = new System.Drawing.Size(62, 18);
             this.label5.TabIndex = 11;
             this.label5.Text = "GUEST :";
             // 
@@ -167,13 +167,14 @@
             // 
             this.btnFindCheapFlight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFindCheapFlight.ForeColor = System.Drawing.Color.White;
-            this.btnFindCheapFlight.Location = new System.Drawing.Point(272, 124);
+            this.btnFindCheapFlight.Location = new System.Drawing.Point(307, 124);
             this.btnFindCheapFlight.Name = "btnFindCheapFlight";
-            this.btnFindCheapFlight.Size = new System.Drawing.Size(122, 153);
+            this.btnFindCheapFlight.Size = new System.Drawing.Size(87, 153);
             this.btnFindCheapFlight.TabIndex = 13;
             this.btnFindCheapFlight.Text = "FIND CHEAP FLIGHT";
             this.btnFindCheapFlight.UseVisualStyleBackColor = true;
             this.btnFindCheapFlight.Click += new System.EventHandler(this.btnFindCheapFlight_Click);
+//            this.btnFindCheapFlight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnFindCheapFlight_MouseDown);
             // 
             // label6
             // 
@@ -182,7 +183,7 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(1, 576);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(200, 16);
+            this.label6.Size = new System.Drawing.Size(158, 13);
             this.label6.TabIndex = 14;
             this.label6.Text = "BH SOFTWARE DEVELOPMENT";
             // 
@@ -193,20 +194,20 @@
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(286, 576);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(148, 16);
+            this.label7.Size = new System.Drawing.Size(118, 13);
             this.label7.TabIndex = 15;
             this.label7.Text = "ALL RIGHTS RESERVED";
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(152, 150);
+            this.numericUpDown1.Location = new System.Drawing.Point(141, 150);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(97, 29);
+            this.numericUpDown1.Size = new System.Drawing.Size(108, 25);
             this.numericUpDown1.TabIndex = 16;
             // 
             // FlightSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;

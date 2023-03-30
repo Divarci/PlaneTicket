@@ -22,9 +22,6 @@ namespace PlaneTicket
 
         }
 
-        private void newbutton_Click(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

@@ -11,6 +11,7 @@ using EntityLayer;
 using DALayer;
 using LogicLayer;
 using System.Data.SqlClient;
+using System.Windows.Markup;
 
 namespace PlaneTicket
 {
@@ -20,8 +21,39 @@ namespace PlaneTicket
         {
             InitializeComponent();
         }
+        List<string> hours = new List<string>();
+        List<string> prices = new List<string>();
+        List<string> flightNo = new List<string>();
+        List<string> CaptainName = new List<string>();
+       
+        void button_click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
 
-        
+            frmSeatPlan fr = new frmSeatPlan();
+            for (int i = 0; i < hours.Count; i++)
+            {
+                if (btn.Text == hours[i])
+                {
+                    fr.a = hours[i];
+                    fr.b = prices[i];
+                    fr.c = flightNo[i];
+                    fr.d = CaptainName[i];
+
+
+                }
+            }
+            fr.Show();
+           
+            
+        }
+        /*
+        void button_MouseDown(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.BackColor = Color.Green;
+        }
+        */
         private void FlightSearch_Load(object sender, EventArgs e)
         {
 
@@ -45,9 +77,13 @@ namespace PlaneTicket
 
         private void btnFindCheapFlight_Click(object sender, EventArgs e)
         {
+            hours.Clear();
+            prices.Clear();
+            flightNo.Clear();
+            CaptainName.Clear();
             frmFlights fr = new frmFlights();
             fr.Show();
-
+            /*
             // find totalflightnumber
             int flightNumber = 0;
             int lineId = 0;
@@ -68,13 +104,24 @@ namespace PlaneTicket
 
                 flightNumber = Convert.ToInt16(dr2[4].ToString());
                 lineId = Convert.ToInt16(dr2[0].ToString());
-                
+
             }
             Connection.conn.Close();
+            */
+            List<int> values = new List<int>();
+            LLFlights.LLCatchFlightNumber(cmbFrom, cmbTo, dtpDep, values);
+            int lineId = values[1];
+            int flightNumber = values[0];
 
             // added flight hours in a temp list
+            
+            LLFlights.LLCatchFlightInfos(hours, prices, flightNo, CaptainName, lineId);
+            /*
             List<string> hours = new List<string>();
-            SqlCommand cmd = new SqlCommand("Select flightTime from Tbl_Flights where flightLine=@p1", Connection.conn);
+            List<string> prices = new List<string>();
+            List<string> flightNo = new List<string>();
+            List<string> CaptainName = new List<string>();
+            SqlCommand cmd = new SqlCommand("Select flightTime,flightPrice,flightNo,CaptainName from Tbl_Flights where flightLine=@p1", Connection.conn);
             cmd.Parameters.AddWithValue("@p1", lineId);
 
             if (cmd.Connection.State != ConnectionState.Open)
@@ -85,32 +132,67 @@ namespace PlaneTicket
             while (dr.Read())
             {
                 hours.Add(dr[0].ToString());
+                prices.Add(dr[1].ToString());
+                flightNo.Add(dr[2].ToString());
+                CaptainName.Add(dr[3].ToString());
             }
             Connection.conn.Close();
-
+            */
 
             // add buttons
-            int top = 40;
-            int left = 40;
-            int width = 100;
+            int l1 = 20;
+            int l2 = 20;
+
             for (int i = 0; i < flightNumber; i++)
             {
+                //create button
                 Button newbutton = new Button();
 
-                newbutton.Top = top;
-                newbutton.Left = left;
-                newbutton.Width = width;
-                newbutton.Text = hours[i];
+                newbutton.FlatStyle = FlatStyle.Flat;
+                newbutton.FlatAppearance.BorderColor = Color.LightSeaGreen;
+                newbutton.FlatAppearance.BorderSize = 3;
+                newbutton.ForeColor = Color.LightSeaGreen;
+                newbutton.Font = new Font(newbutton.Font.FontFamily, 14);
+                newbutton.Location = new Point(l1, l2);
                 newbutton.Name = "btn" + i;
+                newbutton.Size = new Size(120, 40);
+                newbutton.Text = hours[i];
+                newbutton.UseVisualStyleBackColor = true;
+
+                newbutton.Click += new EventHandler(this.button_click);
+               
                 fr.Controls.Add(newbutton);
 
-                top += 40;
+                // create panel
+                Panel newpanel = new Panel();
 
-                
+                newpanel.Size = new Size(675, 2);
+                newpanel.BackColor = Color.Black;
+                newpanel.Location = new Point(l1, l2 + 55);
+                newpanel.Name = "pnl" + i;
+
+                fr.Controls.Add(newpanel);
+
+                //crerate label
+                Label newlabel = new Label();
+                Font newfont = new Font("Berlin Sans FB", 14);
+                newlabel.ForeColor = Color.Black;
+                newlabel.Font = newfont;
+                newlabel.Location = new Point(l1 + 130, l2 + 10);
+                newlabel.Name = "lbl" + i;
+                newlabel.Text = "CAPTAIN: " + CaptainName[i] + " / PRICE: £" + prices[i] + " / FLIGHT NO: " + flightNo[i];
+                newlabel.AutoSize = true;
+
+                fr.Controls.Add(newlabel);
+
+
+                l2 += 70;
 
             }
 
-            
+
         }
+
+
     }
 }
