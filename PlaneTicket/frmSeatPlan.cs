@@ -16,13 +16,212 @@ namespace PlaneTicket
         {
             InitializeComponent();
         }
-        public string a,b,c,d;
+        int greenButtonNo = 0;
+        void btnCLickColor(Button btn)
+        {
+            if (btn.BackColor == Color.MistyRose)
+            {
+                if (greenButtonNo == tempGuestNo)
+                {
+                    MessageBox.Show("You have reached maximum Selected person", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    btn.BackColor = Color.Green;
+                    btn.ForeColor = Color.White;
+                    greenButtonNo++;
+                }
+
+            }
+
+            else if (btn.BackColor == Color.Crimson)
+            {
+                MessageBox.Show("Seat has already been taken by another person", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (btn.BackColor == Color.Green)
+            {
+                btn.BackColor = Color.MistyRose;
+                btn.ForeColor = Color.Black;
+                greenButtonNo--;
+            }
+        }
+        double totalPrice = 0;
+
+        void btnPriceCalculation(Button btn2)
+        {
+
+            if (btn2.BackColor == Color.Green)
+            {
+                totalPrice = totalPrice + Convert.ToDouble(tempPrices);
+                lblPrice.Text = totalPrice.ToString();
+
+            }
+            else if (btn2.BackColor == Color.MistyRose)
+            {
+                totalPrice = totalPrice - Convert.ToDouble(tempPrices);
+                lblPrice.Text = totalPrice.ToString();
+            }
+        }
+
+        public string tempHours, tempFno, tempCaptain, tempPrices;
+
+        private void btnS3_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS3);
+        }
+
+        private void btnS4_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS4);
+        }
+
+        private void btnS5_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS5);
+        }
+
+        private void btnS6_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS6);
+        }
+
+        private void btnS7_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS7);
+        }
+
+        private void btnS8_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS8);
+        }
+
+        private void btnS9_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS9);
+        }
+
+        private void btnS10_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS10);
+        }
+
+        private void btnS11_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS11);
+        }
+
+        private void btnS12_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS12);
+        }
+
+        private void btnS1_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS1);
+        }
+
+        private void btnS2_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS2);
+        }
+
+        private void btnS3_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS3);
+        }
+
+        private void btnS4_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS4);
+        }
+
+        private void btnS5_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS5);
+        }
+
+        private void btnS6_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS6);
+        }
+
+        private void btnS7_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS7);
+        }
+
+        private void btnS8_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS8);
+        }
+
+        private void btnS9_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS9);
+        }
+
+        private void btnS10_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS10);
+        }
+
+        private void btnS11_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS11);
+        }
+
+        private void btnS12_BackColorChanged(object sender, EventArgs e)
+        {
+            btnPriceCalculation(btnS12);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        public int tempGuestNo;
+        private void btnReserve_Click(object sender, EventArgs e)
+        {
+            int[] tempSeatNo = new int[12];
+            Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
+            frmPessengerInfo fr = new frmPessengerInfo();
+            fr.tempGuestNo = tempGuestNo;
+            for (int i = 0; i < btnTemp.Length; i++)
+            {
+                if (btnTemp[i].BackColor == Color.Green)
+                {
+                    tempSeatNo[i] = i+1;
+                }
+            }
+            for (int y = 0;y < tempSeatNo.Length; y++)
+            {
+                if (tempSeatNo[y] > 0)
+                {
+                    fr.tempSeatNo.Add(tempSeatNo[y]);
+                }
+            }
+            
+                    
+           
+            fr.Show();
+        }
+
+        private void btnS2_Click(object sender, EventArgs e)
+        {
+            btnCLickColor(btnS2);
+        }
+
+        private void btnS1_MouseClick(object sender, MouseEventArgs e)
+        {
+            btnCLickColor(btnS1);
+        }
+
         private void frmSeatPlan_Load(object sender, EventArgs e)
         {
-            label1.Text = a;
-            label2.Text = b;
-            label3.Text = c;
-            label4.Text = d;
+            lblHour.Text = tempHours;
+            lblFno.Text = tempFno;
+            lblCaptain.Text = tempCaptain;
+
         }
     }
 }

@@ -35,11 +35,12 @@ namespace PlaneTicket
             {
                 if (btn.Text == hours[i])
                 {
-                    fr.a = hours[i];
-                    fr.b = prices[i];
-                    fr.c = flightNo[i];
-                    fr.d = CaptainName[i];
-
+                    fr.Text = hours[i] + "    " + flightNo[i] +"    Seat Plan";
+                    fr.tempHours = hours[i];
+                    fr.tempPrices = prices[i];
+                    fr.tempFno = flightNo[i];
+                    fr.tempCaptain= CaptainName[i];
+                    fr.tempGuestNo = Convert.ToInt16(numericUpDown1.Value);
 
                 }
             }
@@ -82,6 +83,7 @@ namespace PlaneTicket
             flightNo.Clear();
             CaptainName.Clear();
             frmFlights fr = new frmFlights();
+            
             fr.Show();
             /*
             // find totalflightnumber

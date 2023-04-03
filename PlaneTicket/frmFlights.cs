@@ -16,7 +16,7 @@ namespace PlaneTicket
         {
             InitializeComponent();
         }
-
+        public int tempGuestNo;
         private void frmFlights_Load(object sender, EventArgs e)
         {
 
