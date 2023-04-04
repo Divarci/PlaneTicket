@@ -1,7 +1,10 @@
-﻿using System;
+﻿using DALayer;
+using LogicLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -63,7 +66,7 @@ namespace PlaneTicket
             }
         }
 
-        public string tempHours, tempFno, tempCaptain, tempPrices;
+        public string tempHours, tempFno, tempCaptain, tempPrices, FID;
 
         private void btnS3_Click(object sender, EventArgs e)
         {
@@ -185,25 +188,25 @@ namespace PlaneTicket
             int[] tempSeatNo = new int[12];
             Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
             frmPessengerInfo fr = new frmPessengerInfo();
+            fr.FID = FID;
             fr.tempGuestNo = tempGuestNo;
             for (int i = 0; i < btnTemp.Length; i++)
             {
                 if (btnTemp[i].BackColor == Color.Green)
                 {
-                    tempSeatNo[i] = i+1;
+                    tempSeatNo[i] = i + 1;
                 }
             }
-            for (int y = 0;y < tempSeatNo.Length; y++)
+            for (int y = 0; y < tempSeatNo.Length; y++)
             {
                 if (tempSeatNo[y] > 0)
                 {
-                    fr.tempSeatNo.Add(tempSeatNo[y]);
+                    fr.tempSeatNo[y] = tempSeatNo[y];
                 }
             }
-            
-                    
-           
+
             fr.Show();
+            this.Close();
         }
 
         private void btnS2_Click(object sender, EventArgs e)
@@ -222,6 +225,38 @@ namespace PlaneTicket
             lblFno.Text = tempFno;
             lblCaptain.Text = tempCaptain;
 
+            Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
+
+            List<string> SeatValues = new List<string>();
+
+            LLSeats.ReservedSeats(FID, SeatValues);
+            
+            
+            /*
+            List<string> pessengerNames = new List<string>();
+            List<string> seatNumber = new List<string>();
+            SqlCommand cmd = new SqlCommand("Select pessengerName from Tbl_Seats where flightId=@p1", Connection.conn);
+            cmd.Parameters.AddWithValue("@p1", FID);
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                pessengerNames.Add(dr[0].ToString());
+                
+            }
+            cmd.Connection.Close();
+            */
+            for (int i = 0; i < SeatValues.Count; i++)
+            {
+                if (SeatValues[i].Length != 0 || SeatValues[i] != string.Empty)
+                {
+                    btnTemp[i].BackColor = Color.Red;
+                    btnTemp[i].Enabled = false;
+                }
+            }
         }
     }
 }

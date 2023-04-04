@@ -45,6 +45,7 @@
     <Compile Include="Connection.cs" />
     <Compile Include="DALFlights.cs" />
     <Compile Include="DALLines.cs" />
+    <Compile Include="DALSeats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

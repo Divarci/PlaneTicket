@@ -11,14 +11,14 @@ namespace LogicLayer
 {
     public class LLFlights
     {
-        public static List<int> LLCatchFlightNumber(ComboBox From, ComboBox To, DateTimePicker DepTime, List<int> values)
+        public static void LLCatchFlightNumber(ComboBox From, ComboBox To, DateTimePicker DepTime, List<int> values)
         {
-            return DALFlights.CatchFlightNumber(From, To, DepTime, values);
+            DALFlights.CatchFlightNumber(From, To, DepTime, values);
         }
 
-        public static List<string> LLCatchFlightInfos(List<string> hours, List<string> prices, List<string> flightNo, List<string> CaptainName, int lineId)
+        public static void LLCatchFlightInfos(List<string> hours, List<string> prices, List<string> flightNo, List<string> CaptainName,List<string> FlightId, int lineId)
         {
-            return DALFlights.CatchFlightInfos(hours,prices, flightNo, CaptainName, lineId);
+            DALFlights.CatchFlightInfos(hours, prices, flightNo, CaptainName, FlightId, lineId);
         }
     }
 }

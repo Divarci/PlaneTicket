@@ -25,11 +25,12 @@ namespace PlaneTicket
         List<string> prices = new List<string>();
         List<string> flightNo = new List<string>();
         List<string> CaptainName = new List<string>();
+        List<string> FlightId = new List<string>();
        
         void button_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-
+            
             frmSeatPlan fr = new frmSeatPlan();
             for (int i = 0; i < hours.Count; i++)
             {
@@ -41,11 +42,14 @@ namespace PlaneTicket
                     fr.tempFno = flightNo[i];
                     fr.tempCaptain= CaptainName[i];
                     fr.tempGuestNo = Convert.ToInt16(numericUpDown1.Value);
+                    fr.FID = FlightId[i];
 
                 }
             }
+            frmFlights frtemp = new frmFlights();
+            frtemp.Close();
             fr.Show();
-           
+            
             
         }
         /*
@@ -82,6 +86,7 @@ namespace PlaneTicket
             prices.Clear();
             flightNo.Clear();
             CaptainName.Clear();
+            FlightId.Clear();
             frmFlights fr = new frmFlights();
             
             fr.Show();
@@ -117,7 +122,7 @@ namespace PlaneTicket
 
             // added flight hours in a temp list
             
-            LLFlights.LLCatchFlightInfos(hours, prices, flightNo, CaptainName, lineId);
+            LLFlights.LLCatchFlightInfos(hours, prices, flightNo, CaptainName,FlightId, lineId);
             /*
             List<string> hours = new List<string>();
             List<string> prices = new List<string>();

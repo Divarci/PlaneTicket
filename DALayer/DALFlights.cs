@@ -14,7 +14,7 @@ namespace DALayer
     public class DALFlights
     {
 
-        public static List<int> CatchFlightNumber(ComboBox from, ComboBox to, DateTimePicker deptime, List<int> values)
+        public static void CatchFlightNumber(ComboBox from, ComboBox to, DateTimePicker deptime, List<int> values)
         {
             // find totalflightnumber
 
@@ -40,13 +40,12 @@ namespace DALayer
 
             }
             Connection.conn.Close();
-            return values;
         }
-        public static List<string> CatchFlightInfos(List<string> hours, List<string> prices, List<string> flightNo, List<string> CaptainName,int lineId)
+        public static void CatchFlightInfos(List<string> hours, List<string> prices, List<string> flightNo, List<string> CaptainName, List<string> FlightId, int lineId)
         {
 
-            
-            SqlCommand cmd = new SqlCommand("Select flightTime,flightPrice,flightNo,CaptainName from Tbl_Flights where flightLine=@p1", Connection.conn);
+
+            SqlCommand cmd = new SqlCommand("Select flightTime,flightPrice,flightNo,CaptainName,flightId from Tbl_Flights where flightLine=@p1", Connection.conn);
             cmd.Parameters.AddWithValue("@p1", lineId);
 
             if (cmd.Connection.State != ConnectionState.Open)
@@ -60,9 +59,10 @@ namespace DALayer
                 prices.Add(dr[1].ToString());
                 flightNo.Add(dr[2].ToString());
                 CaptainName.Add(dr[3].ToString());
+                FlightId.Add(dr[4].ToString());
             }
             Connection.conn.Close();
-            return hours;
+            
         }
     }
 }

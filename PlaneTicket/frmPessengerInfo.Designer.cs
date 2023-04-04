@@ -83,6 +83,7 @@
             this.cmbS9 = new System.Windows.Forms.ComboBox();
             this.cmbS12 = new System.Windows.Forms.ComboBox();
             this.cmbS11 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,6 +101,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Silver;
+            this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.label2);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.label4);
@@ -394,6 +396,7 @@
             this.btnCancel.TabIndex = 72;
             this.btnCancel.Text = "CANCEL";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnReserve
             // 
@@ -406,102 +409,126 @@
             this.btnReserve.TabIndex = 71;
             this.btnReserve.Text = "SAVE AND BOOK";
             this.btnReserve.UseVisualStyleBackColor = false;
+            this.btnReserve.Click += new System.EventHandler(this.btnReserve_Click);
             // 
             // cmbS1
             // 
+            this.cmbS1.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS1.FormattingEnabled = true;
-            this.cmbS1.Location = new System.Drawing.Point(797, 68);
+            this.cmbS1.Location = new System.Drawing.Point(797, 71);
             this.cmbS1.Name = "cmbS1";
-            this.cmbS1.Size = new System.Drawing.Size(64, 26);
+            this.cmbS1.Size = new System.Drawing.Size(64, 24);
             this.cmbS1.TabIndex = 73;
             // 
             // cmbS2
             // 
+            this.cmbS2.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS2.FormattingEnabled = true;
-            this.cmbS2.Location = new System.Drawing.Point(797, 99);
+            this.cmbS2.Location = new System.Drawing.Point(797, 102);
             this.cmbS2.Name = "cmbS2";
-            this.cmbS2.Size = new System.Drawing.Size(64, 26);
+            this.cmbS2.Size = new System.Drawing.Size(64, 24);
             this.cmbS2.TabIndex = 74;
             // 
             // cmbS4
             // 
+            this.cmbS4.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS4.FormattingEnabled = true;
-            this.cmbS4.Location = new System.Drawing.Point(797, 161);
+            this.cmbS4.Location = new System.Drawing.Point(797, 164);
             this.cmbS4.Name = "cmbS4";
-            this.cmbS4.Size = new System.Drawing.Size(64, 26);
+            this.cmbS4.Size = new System.Drawing.Size(64, 24);
             this.cmbS4.TabIndex = 76;
             // 
             // cmbS3
             // 
+            this.cmbS3.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS3.FormattingEnabled = true;
-            this.cmbS3.Location = new System.Drawing.Point(797, 130);
+            this.cmbS3.Location = new System.Drawing.Point(797, 133);
             this.cmbS3.Name = "cmbS3";
-            this.cmbS3.Size = new System.Drawing.Size(64, 26);
+            this.cmbS3.Size = new System.Drawing.Size(64, 24);
             this.cmbS3.TabIndex = 75;
             // 
             // cmbS6
             // 
+            this.cmbS6.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS6.FormattingEnabled = true;
-            this.cmbS6.Location = new System.Drawing.Point(797, 223);
+            this.cmbS6.Location = new System.Drawing.Point(797, 226);
             this.cmbS6.Name = "cmbS6";
-            this.cmbS6.Size = new System.Drawing.Size(64, 26);
+            this.cmbS6.Size = new System.Drawing.Size(64, 24);
             this.cmbS6.TabIndex = 78;
             // 
             // cmbS5
             // 
+            this.cmbS5.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS5.FormattingEnabled = true;
-            this.cmbS5.Location = new System.Drawing.Point(797, 192);
+            this.cmbS5.Location = new System.Drawing.Point(797, 195);
             this.cmbS5.Name = "cmbS5";
-            this.cmbS5.Size = new System.Drawing.Size(64, 26);
+            this.cmbS5.Size = new System.Drawing.Size(64, 24);
             this.cmbS5.TabIndex = 77;
             // 
             // cmbS8
             // 
+            this.cmbS8.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS8.FormattingEnabled = true;
-            this.cmbS8.Location = new System.Drawing.Point(797, 285);
+            this.cmbS8.Location = new System.Drawing.Point(797, 288);
             this.cmbS8.Name = "cmbS8";
-            this.cmbS8.Size = new System.Drawing.Size(64, 26);
+            this.cmbS8.Size = new System.Drawing.Size(64, 24);
             this.cmbS8.TabIndex = 80;
             // 
             // cmbS7
             // 
+            this.cmbS7.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS7.FormattingEnabled = true;
-            this.cmbS7.Location = new System.Drawing.Point(797, 254);
+            this.cmbS7.Location = new System.Drawing.Point(797, 257);
             this.cmbS7.Name = "cmbS7";
-            this.cmbS7.Size = new System.Drawing.Size(64, 26);
+            this.cmbS7.Size = new System.Drawing.Size(64, 24);
             this.cmbS7.TabIndex = 79;
             // 
             // cmbS10
             // 
+            this.cmbS10.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS10.FormattingEnabled = true;
-            this.cmbS10.Location = new System.Drawing.Point(797, 347);
+            this.cmbS10.Location = new System.Drawing.Point(797, 350);
             this.cmbS10.Name = "cmbS10";
-            this.cmbS10.Size = new System.Drawing.Size(64, 26);
+            this.cmbS10.Size = new System.Drawing.Size(64, 24);
             this.cmbS10.TabIndex = 82;
             // 
             // cmbS9
             // 
+            this.cmbS9.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS9.FormattingEnabled = true;
-            this.cmbS9.Location = new System.Drawing.Point(797, 316);
+            this.cmbS9.Location = new System.Drawing.Point(797, 319);
             this.cmbS9.Name = "cmbS9";
-            this.cmbS9.Size = new System.Drawing.Size(64, 26);
+            this.cmbS9.Size = new System.Drawing.Size(64, 24);
             this.cmbS9.TabIndex = 81;
             // 
             // cmbS12
             // 
+            this.cmbS12.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS12.FormattingEnabled = true;
-            this.cmbS12.Location = new System.Drawing.Point(797, 409);
+            this.cmbS12.Location = new System.Drawing.Point(797, 412);
             this.cmbS12.Name = "cmbS12";
-            this.cmbS12.Size = new System.Drawing.Size(64, 26);
+            this.cmbS12.Size = new System.Drawing.Size(64, 24);
             this.cmbS12.TabIndex = 84;
             // 
             // cmbS11
             // 
+            this.cmbS11.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbS11.FormattingEnabled = true;
-            this.cmbS11.Location = new System.Drawing.Point(797, 378);
+            this.cmbS11.Location = new System.Drawing.Point(797, 381);
             this.cmbS11.Name = "cmbS11";
-            this.cmbS11.Size = new System.Drawing.Size(64, 26);
+            this.cmbS11.Size = new System.Drawing.Size(64, 24);
             this.cmbS11.TabIndex = 83;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Berlin Sans FB Demi", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(796, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 18);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "SEAT";
             // 
             // frmPessengerInfo
             // 
@@ -632,5 +659,6 @@
         private System.Windows.Forms.ComboBox cmbS9;
         private System.Windows.Forms.ComboBox cmbS12;
         private System.Windows.Forms.ComboBox cmbS11;
+        private System.Windows.Forms.Label label3;
     }
 }

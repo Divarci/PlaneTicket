@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="LLFlights.cs" />
     <Compile Include="LLLines.cs" />
+    <Compile Include="LLSeats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="EntityFlight.cs" />
     <Compile Include="EntityLines.cs" />
+    <Compile Include="EntitySeats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
