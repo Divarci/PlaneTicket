@@ -21,8 +21,12 @@ namespace LogicLayer
 
         public static void ReservedSeats(string FID, List<string> values)
         {
-            DALSeats.ReservedSeats(FID, values);
+            DALSeats.DALReservedSeats(FID, values);
 
+        }
+        public static List<string> LLSeatInforation(string FID)
+        {
+            return DALSeats.DALSeatInformaion(FID);
         }
     }
 }

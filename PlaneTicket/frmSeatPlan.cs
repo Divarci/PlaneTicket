@@ -185,28 +185,37 @@ namespace PlaneTicket
         public int tempGuestNo;
         private void btnReserve_Click(object sender, EventArgs e)
         {
-            int[] tempSeatNo = new int[12];
-            Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
-            frmPessengerInfo fr = new frmPessengerInfo();
-            fr.FID = FID;
-            fr.tempGuestNo = tempGuestNo;
-            for (int i = 0; i < btnTemp.Length; i++)
+            if(greenButtonNo != tempGuestNo)
             {
-                if (btnTemp[i].BackColor == Color.Green)
-                {
-                    tempSeatNo[i] = i + 1;
-                }
+                MessageBox.Show("Please select seats for all pessengers", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            for (int y = 0; y < tempSeatNo.Length; y++)
+            else
             {
-                if (tempSeatNo[y] > 0)
+                int[] tempSeatNo = new int[12];
+                Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
+                frmPessengerInfo fr = new frmPessengerInfo();
+                fr.FID = FID;
+                fr.tempGuestNo = tempGuestNo;
+                for (int i = 0; i < btnTemp.Length; i++)
                 {
-                    fr.tempSeatNo[y] = tempSeatNo[y];
+                    if (btnTemp[i].BackColor == Color.Green)
+                    {
+                        tempSeatNo[i] = i + 1;
+                    }
                 }
+                for (int y = 0; y < tempSeatNo.Length; y++)
+                {
+                    if (tempSeatNo[y] > 0)
+                    {
+                        fr.tempSeatNo[y] = tempSeatNo[y];
+                    }
+                }
+
+                fr.Show();
+                this.Close();
             }
 
-            fr.Show();
-            this.Close();
+            
         }
 
         private void btnS2_Click(object sender, EventArgs e)

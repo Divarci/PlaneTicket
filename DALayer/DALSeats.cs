@@ -9,12 +9,13 @@ using EntityLayer;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace DALayer
 {
     public class DALSeats
     {
-        public static bool DALSeatUpdate(EntitySeats Seats,string FNO, string seatno)
+        public static bool DALSeatUpdate(EntitySeats Seats, string FNO, string seatno)
         {
             SqlCommand cmd = new SqlCommand("Update Tbl_Seats set pessengerName=@p1,pessengerSurname=@p2,passportNumber=@p3 where flightId=@p4 and seatNumber=@p5", Connection.conn);
             if (cmd.Connection.State != ConnectionState.Open)
@@ -27,12 +28,12 @@ namespace DALayer
             cmd.Parameters.AddWithValue("@p4", FNO);
             cmd.Parameters.AddWithValue("@p5", seatno);
 
-            return cmd.ExecuteNonQuery()>0;
+            return cmd.ExecuteNonQuery() > 0;
         }
 
-        public static void ReservedSeats(string FID,List<string> values)
+        public static void DALReservedSeats(string FID, List<string> values)
         {
-                        
+
             SqlCommand cmd = new SqlCommand("Select pessengerName from Tbl_Seats where flightId=@p1", Connection.conn);
             cmd.Parameters.AddWithValue("@p1", FID);
             if (cmd.Connection.State != ConnectionState.Open)
@@ -47,8 +48,29 @@ namespace DALayer
             }
             cmd.Connection.Close();
 
-                       
+        }
 
+        public static List<string> DALSeatInformaion(string FID)
+        {
+            List<string> values = new List<string>();
+            SqlCommand cmd = new SqlCommand("Select pessengerName from Tbl_Seats where flightId=@p1", Connection.conn);
+            cmd.Parameters.AddWithValue("@p1", FID);
+            if (cmd.Connection.State != ConnectionState.Open)
+            {
+                cmd.Connection.Open();
+            }
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+
+                values.Add(dr[0].ToString());
+                
+
+
+            }
+            values.RemoveAll(item => string.IsNullOrEmpty(item));
+            cmd.Connection.Close();
+            return values;
         }
     }
 }

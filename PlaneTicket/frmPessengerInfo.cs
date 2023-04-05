@@ -88,28 +88,54 @@ namespace PlaneTicket
 
         private void btnReserve_Click(object sender, EventArgs e)
         {
+            
             TextBox[] txtNameBoxes = { txtName1, txtName2, txtName3, txtName4, txtName5, txtName6, txtName7, txtName8, txtName9, txtName10, txtName11, txtName12 };
             TextBox[] txtSurNameBoxes = { txtSurname1, txtSurname2, txtSurname3, txtSurname4, txtSurname5, txtSurname6, txtSurname7, txtSurname8, txtSurname9, txtSurname10, txtSurname11, txtSurname12 };
             TextBox[] txtPassBoxes = { txtPassport1, txtPassport2, txtPassport3, txtPassport4, txtPassport5, txtPassport6, txtPassport7, txtPassport8, txtPassport9, txtPassport10, txtPassport11, txtPassport12 };
-            ComboBox[] SeatBoxes = { cmbS1, cmbS2, cmbS3, cmbS4, cmbS5, cmbS5, cmbS6, cmbS7, cmbS8, cmbS9, cmbS10, cmbS11, cmbS12 };
-
-            for (int i = 0; i < txtNameBoxes.Length; i++)
+            ComboBox[] SeatBoxes = { cmbS1, cmbS2, cmbS3, cmbS4, cmbS5, cmbS6, cmbS7, cmbS8, cmbS9, cmbS10, cmbS11, cmbS12 };
+            int tempvalue = 0;
+            int tempvalue2 = 0;
+            for (int i = 0; i < tempGuestNo; i++)
             {
-                if (txtNameBoxes[i].Enabled)
+                for (int y = 0; y < tempGuestNo; y++)
                 {
-
-                    register(txtNameBoxes[i], txtSurNameBoxes[i], txtPassBoxes[i], SeatBoxes[i]);
-
+                    if (SeatBoxes[i].Text == SeatBoxes[y].Text)
+                    {
+                        tempvalue++;
+                    }
+                }
+               if( txtNameBoxes[i].Text == "" || txtSurNameBoxes[i].Text == "" || txtPassBoxes[i].Text == "" || SeatBoxes[i].Text == "")
+                {
+                    tempvalue2++;
                 }
             }
-            MessageBox.Show("You have booked your Seats. Have a nice fligt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if(tempvalue2>0)
+            {
+                MessageBox.Show("Please provide all informationa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (tempvalue > tempGuestNo)
+                {
+                    MessageBox.Show("You cannot select same seat for same pessenger", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    for (int i = 0; i < txtNameBoxes.Length; i++)
+                    {
+                        if (txtNameBoxes[i].Enabled)
+                        {
 
-            
+                            register(txtNameBoxes[i], txtSurNameBoxes[i], txtPassBoxes[i], SeatBoxes[i]);
 
+                        }
+                    }
+                    MessageBox.Show("You have booked your Seats. Have a nice fligt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            this.Close();
-
-
+                    this.Close();
+                }
+            }
+           
         }
     }
 }

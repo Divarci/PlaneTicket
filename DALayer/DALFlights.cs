@@ -39,6 +39,7 @@ namespace DALayer
                 values.Add(Convert.ToInt32(dr2[0]));
 
             }
+          
             Connection.conn.Close();
         }
         public static void CatchFlightInfos(List<string> hours, List<string> prices, List<string> flightNo, List<string> CaptainName, List<string> FlightId, int lineId)
@@ -64,5 +65,6 @@ namespace DALayer
             Connection.conn.Close();
             
         }
+        
     }
 }

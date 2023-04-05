@@ -34,8 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbFrom = new System.Windows.Forms.ComboBox();
             this.cmbTo = new System.Windows.Forms.ComboBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.rbOneway = new System.Windows.Forms.RadioButton();
+            this.rbReturn = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.dtpDep = new System.Windows.Forms.DateTimePicker();
             this.dtpReturn = new System.Windows.Forms.DateTimePicker();
@@ -44,9 +44,9 @@
             this.btnFindCheapFlight = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numGuest = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numGuest)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -94,29 +94,31 @@
             this.cmbTo.Size = new System.Drawing.Size(253, 26);
             this.cmbTo.TabIndex = 4;
             // 
-            // radioButton1
+            // rbOneway
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton1.Location = new System.Drawing.Point(166, 12);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(87, 20);
-            this.radioButton1.TabIndex = 5;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "ONE WAY";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbOneway.AutoSize = true;
+            this.rbOneway.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbOneway.Location = new System.Drawing.Point(162, 12);
+            this.rbOneway.Name = "rbOneway";
+            this.rbOneway.Size = new System.Drawing.Size(87, 20);
+            this.rbOneway.TabIndex = 5;
+            this.rbOneway.TabStop = true;
+            this.rbOneway.Text = "ONE WAY";
+            this.rbOneway.UseVisualStyleBackColor = true;
+            this.rbOneway.CheckedChanged += new System.EventHandler(this.rbOneway_CheckedChanged);
             // 
-            // radioButton2
+            // rbReturn
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioButton2.Location = new System.Drawing.Point(307, 12);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(75, 20);
-            this.radioButton2.TabIndex = 6;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "RETURN";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbReturn.AutoSize = true;
+            this.rbReturn.Font = new System.Drawing.Font("Berlin Sans FB", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbReturn.Location = new System.Drawing.Point(280, 12);
+            this.rbReturn.Name = "rbReturn";
+            this.rbReturn.Size = new System.Drawing.Size(75, 20);
+            this.rbReturn.TabIndex = 6;
+            this.rbReturn.TabStop = true;
+            this.rbReturn.Text = "RETURN";
+            this.rbReturn.UseVisualStyleBackColor = true;
+            this.rbReturn.CheckedChanged += new System.EventHandler(this.rbReturn_CheckedChanged);
             // 
             // label3
             // 
@@ -197,17 +199,17 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "ALL RIGHTS RESERVED";
             // 
-            // numericUpDown1
+            // numGuest
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(141, 150);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.numGuest.Location = new System.Drawing.Point(141, 150);
+            this.numGuest.Maximum = new decimal(new int[] {
             12,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(108, 25);
-            this.numericUpDown1.TabIndex = 16;
+            this.numGuest.Name = "numGuest";
+            this.numGuest.Size = new System.Drawing.Size(108, 25);
+            this.numGuest.TabIndex = 16;
             // 
             // FlightSearch
             // 
@@ -216,7 +218,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.ClientSize = new System.Drawing.Size(409, 593);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.numGuest);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnFindCheapFlight);
@@ -225,8 +227,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dtpDep);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.rbReturn);
+            this.Controls.Add(this.rbOneway);
             this.Controls.Add(this.cmbTo);
             this.Controls.Add(this.cmbFrom);
             this.Controls.Add(this.label2);
@@ -241,7 +243,7 @@
             this.Text = "Flight Search";
             this.Load += new System.EventHandler(this.FlightSearch_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numGuest)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,8 +256,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbFrom;
         private System.Windows.Forms.ComboBox cmbTo;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton rbOneway;
+        private System.Windows.Forms.RadioButton rbReturn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dtpDep;
         private System.Windows.Forms.DateTimePicker dtpReturn;
@@ -264,7 +266,7 @@
         private System.Windows.Forms.Button btnFindCheapFlight;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numGuest;
     }
 }
 
