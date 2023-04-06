@@ -146,6 +146,7 @@
             this.dtpReturn.Name = "dtpReturn";
             this.dtpReturn.Size = new System.Drawing.Size(149, 25);
             this.dtpReturn.TabIndex = 10;
+            this.dtpReturn.ValueChanged += new System.EventHandler(this.dtpReturn_ValueChanged);
             // 
             // label4
             // 

@@ -230,6 +230,9 @@ namespace PlaneTicket
 
         private void frmSeatPlan_Load(object sender, EventArgs e)
         {
+            frmFlights fr = new frmFlights();
+            fr.Close();
+
             lblHour.Text = tempHours;
             lblFno.Text = tempFno;
             lblCaptain.Text = tempCaptain;

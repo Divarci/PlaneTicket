@@ -39,12 +39,11 @@ namespace DALayer
                 values.Add(Convert.ToInt32(dr2[0]));
 
             }
-          
+
             Connection.conn.Close();
         }
         public static void CatchFlightInfos(List<string> hours, List<string> prices, List<string> flightNo, List<string> CaptainName, List<string> FlightId, int lineId)
         {
-
 
             SqlCommand cmd = new SqlCommand("Select flightTime,flightPrice,flightNo,CaptainName,flightId from Tbl_Flights where flightLine=@p1", Connection.conn);
             cmd.Parameters.AddWithValue("@p1", lineId);
@@ -63,7 +62,7 @@ namespace DALayer
                 FlightId.Add(dr[4].ToString());
             }
             Connection.conn.Close();
-            
+
         }
         
     }
