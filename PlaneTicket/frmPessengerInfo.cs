@@ -26,33 +26,41 @@ namespace PlaneTicket
         {
             InitializeComponent();
         }
+        //We received guest number
         public int tempGuestNo;
+        //We received choosen seats
         public int[] tempSeatNo = new int[12];
+        //We received Flight Id
         public string FID;
-
+        //We received Oneway or return
+        public bool whichway;
+        //Will be working on
+        public string tempPessengerName;
+        public string tempPessengerSurname;
+        public string tempPessengerPass;
 
         private void frmPessengerInfo_Load(object sender, EventArgs e)
         {
-           
+            //All comboboxes and textboxes assigned to arrays as we will use for loops
             ComboBox[] cmbSeat = { cmbS1, cmbS2, cmbS3, cmbS4, cmbS5, cmbS6, cmbS7, cmbS8, cmbS9, cmbS10, cmbS11, cmbS12 };
             TextBox[] txtNames = { txtName1, txtName2, txtName3, txtName4, txtName5, txtName6, txtName7, txtName8, txtName9, txtName10, txtName11, txtName12 };
             TextBox[] txtSurNames = { txtSurname1, txtSurname2, txtSurname3, txtSurname4, txtSurname5, txtSurname6, txtSurname7, txtSurname8, txtSurname9, txtSurname10, txtSurname11, txtSurname12 };
             TextBox[] txtPassports = { txtPassport1, txtPassport2, txtPassport3, txtPassport4, txtPassport5, txtPassport6, txtPassport7, txtPassport8, txtPassport9, txtPassport10, txtPassport11, txtPassport12 };
-
+            // we will make false unnecessary items.
             for (int i = tempGuestNo; i < 12; i++)
             {
                 txtNames[i].Enabled = false;
                 txtSurNames[i].Enabled = false;
                 txtPassports[i].Enabled = false;
                 cmbSeat[i].Enabled = false;
-
-
             }
+            //add tempseatno information to all comboboxes
             for (int y = 0; y < cmbSeat.Length; y++)
             {
 
                 for (int i = 0; i < tempSeatNo.Length; i++)
                 {
+                    //eliminating values equal to 0 as rest of them our seat numbers
                     if (tempSeatNo[i] != 0)
                     {
                         cmbSeat[y].Items.Add(tempSeatNo[i]);
@@ -73,7 +81,7 @@ namespace PlaneTicket
 
         void register(TextBox name, TextBox surname, TextBox pass, ComboBox seat)
         {
-
+            // save pessenger method using Update method 
             EntitySeats values = new EntitySeats();
 
             values.PessengerName = name.Text;
@@ -82,38 +90,38 @@ namespace PlaneTicket
 
             LLSeats.LLSeatUpdate(values, FID, seat.Text);
 
-
-
-
         }
-        public string firstFlightHour;
 
+
+        //needed for return flight
         List<string> hours2 = new List<string>();
         List<string> prices2 = new List<string>();
         List<string> flightNo2 = new List<string>();
         List<string> CaptainName2 = new List<string>();
         List<string> FlightId2 = new List<string>();
 
-        
-        
+
+        //Needed for return flight
         public string returnflight;
         public string from;
         public string to;
+        public string firstFlightHour;
 
-        public bool situation;
-        
 
+        //dynamic button actions
         void button_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
 
             frmSeatPlan fr = new frmSeatPlan();
+
             int temp = 0;
-            
+            //prevent choosing return flight hours before it.
             if (Convert.ToDateTime(firstFlightHour).TimeOfDay >= Convert.ToDateTime(btn.Text).TimeOfDay)
             {
                 MessageBox.Show("You should select a flight after your deperture", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            //if it is not(same as before we explined at flight search page)
             else
             {
                 for (int i = 0; i < hours2.Count; i++)
@@ -129,6 +137,12 @@ namespace PlaneTicket
                         fr.FID = FlightId2[i];
                         List<string> SeatInfo = LLSeats.LLSeatInforation(FlightId2[i]);
                         temp = SeatInfo.Count;
+                        //it makes bool true and when it came to save pessenger after return flight. algortm calculate it like one way and finish the register
+                        fr.whichway = true;
+                        //still working on it
+                        fr.tempPessengerName = tempPessengerName;
+                        fr.tempPessengerSurname = tempPessengerSurname;
+                        fr.tempPessengerPass = tempPessengerPass;
                     }
 
                 }
@@ -138,24 +152,24 @@ namespace PlaneTicket
                 }
                 else
                 {
-
-                    frmFlights frtemp = new frmFlights();
-                    frtemp.Close();
                     fr.Show();
                 }
             }
 
         }
+
+        //Save Button
         private void btnReserve_Click(object sender, EventArgs e)
         {
-
-
             TextBox[] txtNameBoxes = { txtName1, txtName2, txtName3, txtName4, txtName5, txtName6, txtName7, txtName8, txtName9, txtName10, txtName11, txtName12 };
             TextBox[] txtSurNameBoxes = { txtSurname1, txtSurname2, txtSurname3, txtSurname4, txtSurname5, txtSurname6, txtSurname7, txtSurname8, txtSurname9, txtSurname10, txtSurname11, txtSurname12 };
             TextBox[] txtPassBoxes = { txtPassport1, txtPassport2, txtPassport3, txtPassport4, txtPassport5, txtPassport6, txtPassport7, txtPassport8, txtPassport9, txtPassport10, txtPassport11, txtPassport12 };
             ComboBox[] SeatBoxes = { cmbS1, cmbS2, cmbS3, cmbS4, cmbS5, cmbS6, cmbS7, cmbS8, cmbS9, cmbS10, cmbS11, cmbS12 };
+
+            //will be used for create algoritm prevent choose same values at seats and make empty values for textboxes
             int tempvalue = 0;
             int tempvalue2 = 0;
+            //all comboboxes will be matches between eachothers and when loop is finished and if every combobox values are different tempvalue should be 2
             for (int i = 0; i < tempGuestNo; i++)
             {
                 for (int y = 0; y < tempGuestNo; y++)
@@ -165,48 +179,53 @@ namespace PlaneTicket
                         tempvalue++;
                     }
                 }
+                //if tempvalue2 is bigger than 0 it means we have empty textbox
                 if (txtNameBoxes[i].Text == "" || txtSurNameBoxes[i].Text == "" || txtPassBoxes[i].Text == "" || SeatBoxes[i].Text == "")
                 {
                     tempvalue2++;
                 }
             }
+            //if we have empty textbox
             if (tempvalue2 > 0)
             {
                 MessageBox.Show("Please provide all informationa", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            //if it is not
             else
             {
+                //if we have same seat number for different guests
                 if (tempvalue > tempGuestNo)
                 {
                     MessageBox.Show("You cannot select same seat for same pessenger", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                //if it is not
                 else
                 {
+
                     for (int i = 0; i < txtNameBoxes.Length; i++)
                     {
+                        //we made false unnecessary items, so now we will just choose the enabled ones
                         if (txtNameBoxes[i].Enabled)
                         {
-
                             register(txtNameBoxes[i], txtSurNameBoxes[i], txtPassBoxes[i], SeatBoxes[i]);
+                            //sttill working on it
+                            tempPessengerName = txtNameBoxes[i].Text;
+                            tempPessengerSurname = txtSurNameBoxes[i].Text;
+                            tempPessengerPass = txtPassBoxes[i].Text;
 
                         }
                     }
-
-
-
-                    FlightSearch fr = new FlightSearch();
-                    if (fr.whichway)
+                    // if its one way 
+                    if (whichway)
                     {
                         MessageBox.Show("You have booked your Seats. Have a nice fligt", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        this.Close();
+                        Application.Restart();
                     }
+                    // if we have return flight (same as flight search page)
                     else
                     {
                         MessageBox.Show("You have booked your OUTBOUND flight. Please Click OK to choose INBOUND flight", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                       
-                        
 
                         hours2.Clear();
                         prices2.Clear();
@@ -226,7 +245,11 @@ namespace PlaneTicket
                         LLFlights.LLCatchFlightInfos(hours2, prices2, flightNo2, CaptainName2, FlightId2, lineId);
 
                         frmFlights frfl = new frmFlights();
-
+                        frfl.whichway = true;
+                        frfl.tempPessengerName = tempPessengerName;
+                        frfl.tempPessengerSurname = tempPessengerSurname;
+                        frfl.tempPessengerPass = tempPessengerPass;
+                        MessageBox.Show(whichway.ToString());
 
                         int l1 = 20;
                         int l2 = 20;

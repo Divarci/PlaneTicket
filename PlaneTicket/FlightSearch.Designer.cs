@@ -136,8 +136,7 @@
             this.dtpDep.Name = "dtpDep";
             this.dtpDep.Size = new System.Drawing.Size(149, 25);
             this.dtpDep.TabIndex = 8;
-            this.dtpDep.Value = new System.DateTime(2023, 3, 28, 21, 45, 3, 0);
-            this.dtpDep.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dtpDep.Value = new System.DateTime(2023, 4, 7, 0, 0, 0, 0);
             // 
             // dtpReturn
             // 
@@ -146,7 +145,6 @@
             this.dtpReturn.Name = "dtpReturn";
             this.dtpReturn.Size = new System.Drawing.Size(149, 25);
             this.dtpReturn.TabIndex = 10;
-            this.dtpReturn.ValueChanged += new System.EventHandler(this.dtpReturn_ValueChanged);
             // 
             // label4
             // 
@@ -211,6 +209,7 @@
             this.numGuest.Name = "numGuest";
             this.numGuest.Size = new System.Drawing.Size(108, 25);
             this.numGuest.TabIndex = 16;
+//            this.numGuest.ValueChanged += new System.EventHandler(this.numGuest_ValueChanged);
             // 
             // FlightSearch
             // 

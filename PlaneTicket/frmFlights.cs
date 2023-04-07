@@ -16,13 +16,20 @@ namespace PlaneTicket
         {
             InitializeComponent();
         }
-
+        // temporary informations for return flight
         public string returnflight;
         public string from;
         public string to;
+        public bool whichway;
 
+        //Guest information
         public int tempGuestNo;
+
         
+        // strill working on it
+        public string tempPessengerName;
+        public string tempPessengerSurname;
+        public string tempPessengerPass;
         private void frmFlights_Load(object sender, EventArgs e)
         {
            
