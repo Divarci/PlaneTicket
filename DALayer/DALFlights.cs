@@ -14,14 +14,14 @@ namespace DALayer
     public class DALFlights
     {
 
-        public static void CatchFlightNumber(ComboBox from, ComboBox to, DateTimePicker deptime, List<int> values)
+        public static void CatchFlightNumber(string from, string to, string deptime, List<int> values)
         {
             // find totalflightnumber
 
             SqlCommand cmd2 = new SqlCommand("Select * from Tbl_Lines where lineFrom=@p1 and lineTo=@p2 and lineDate=@p3", Connection.conn);
-            cmd2.Parameters.AddWithValue("@p1", from.Text);
-            cmd2.Parameters.AddWithValue("@p2", to.Text);
-            cmd2.Parameters.AddWithValue("@p3", deptime.Text);
+            cmd2.Parameters.AddWithValue("@p1", from);
+            cmd2.Parameters.AddWithValue("@p2", to);
+            cmd2.Parameters.AddWithValue("@p3", deptime);
 
 
             if (cmd2.Connection.State != ConnectionState.Open)
@@ -31,9 +31,9 @@ namespace DALayer
             SqlDataReader dr2 = cmd2.ExecuteReader();
             if (dr2.Read())
             {
-                from.Text = dr2[1].ToString();
-                to.Text = dr2[2].ToString();
-                deptime.Text = dr2[3].ToString();
+                from = dr2[1].ToString();
+                to = dr2[2].ToString();
+                deptime = dr2[3].ToString();
 
                 values.Add(Convert.ToInt32(dr2[4]));
                 values.Add(Convert.ToInt32(dr2[0]));

@@ -16,6 +16,8 @@ using System.Data.Entity.Core.Common.CommandTrees;
 using System.Security.Cryptography;
 using System.Diagnostics;
 
+
+
 namespace PlaneTicket
 {
     public partial class FlightSearch : Form
@@ -30,15 +32,19 @@ namespace PlaneTicket
         List<string> CaptainName = new List<string>();
         List<string> FlightId = new List<string>();
 
-      
+
 
         public bool whichway;
 
         void button_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            frmPessengerInfo frret = new frmPessengerInfo();
+
+
+
+            
             frmSeatPlan fr = new frmSeatPlan();
+
             int temp = 0;
 
             for (int i = 0; i < hours.Count; i++)
@@ -54,7 +60,10 @@ namespace PlaneTicket
                     fr.FID = FlightId[i];
                     List<string> SeatInfo = LLSeats.LLSeatInforation(FlightId[i]);
                     temp = SeatInfo.Count;
-                    frret.firstFlightHour =hours[i];
+                    fr.firstFlightHour = hours[i];
+                    fr.returnflight =dtpReturn.Text;
+                    fr.from = cmbTo.Text;
+                    fr.to = cmbFrom.Text;
                 }
 
             }
@@ -64,9 +73,7 @@ namespace PlaneTicket
             }
             else
             {
-               
-                frmFlights frtemp = new frmFlights();
-                frtemp.Close();
+
                 fr.Show();
             }
         }
@@ -101,189 +108,99 @@ namespace PlaneTicket
 
         private void btnFindCheapFlight_Click(object sender, EventArgs e)
         {
+
             if (rbOneway.Checked)
             {
+
                 whichway = true;
-                hours.Clear();
-                prices.Clear();
-                flightNo.Clear();
-                CaptainName.Clear();
-                FlightId.Clear();
-
-                List<int> values = new List<int>();
-                LLFlights.LLCatchFlightNumber(cmbFrom, cmbTo, dtpDep, values);
-                if (values.Count == 0)
-                {
-                    MessageBox.Show("Please change your flight date or location", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-
-                    int lineId = values[1];
-                    int flightNumber = values[0];
-
-                    // added flight hours in a temp list
-
-                    LLFlights.LLCatchFlightInfos(hours, prices, flightNo, CaptainName, FlightId, lineId);
-
-                    frmFlights fr = new frmFlights();
-
-                    int l1 = 20;
-                    int l2 = 20;
-                    for (int i = 0; i < flightNumber; i++)
-                    {
-                        //create button
-                        Button newbutton = new Button();
-
-                        newbutton.FlatStyle = FlatStyle.Flat;
-                        newbutton.FlatAppearance.BorderColor = Color.LightSeaGreen;
-                        newbutton.FlatAppearance.BorderSize = 3;
-                        newbutton.ForeColor = Color.LightSeaGreen;
-                        newbutton.Font = new Font(newbutton.Font.FontFamily, 14);
-                        newbutton.Location = new Point(l1, l2);
-                        newbutton.Name = "btn" + i;
-                        newbutton.Size = new Size(120, 40);
-                        newbutton.Text = hours[i];
-                        newbutton.UseVisualStyleBackColor = true;
-
-                        newbutton.Click += new EventHandler(this.button_click);
-
-                        fr.Controls.Add(newbutton);
-
-                        // create panel
-                        Panel newpanel = new Panel();
-
-                        newpanel.Size = new Size(675, 2);
-                        newpanel.BackColor = Color.Black;
-                        newpanel.Location = new Point(l1, l2 + 55);
-                        newpanel.Name = "pnl" + i;
-
-                        fr.Controls.Add(newpanel);
-
-                        //crerate label
-                        Label newlabel = new Label();
-                        Font newfont = new Font("Berlin Sans FB", 14);
-                        newlabel.ForeColor = Color.Black;
-                        newlabel.Font = newfont;
-                        newlabel.Location = new Point(l1 + 130, l2 + 10);
-                        newlabel.Name = "lbl" + i;
-                        newlabel.Text = "CAPTAIN: " + CaptainName[i] + " / PRICE: £" + prices[i] + " / FLIGHT NO: " + flightNo[i];
-                        newlabel.AutoSize = true;
-
-                        fr.Controls.Add(newlabel);
-
-
-                        l2 += 70;
-
-                    }
-
-
-                    fr.Show();
-
-                }
-
             }
             else
             {
                 whichway = false;
-                if (dtpReturn.Value.Date < dtpDep.Value.Date)
+            }
+
+            hours.Clear();
+            prices.Clear();
+            flightNo.Clear();
+            CaptainName.Clear();
+            FlightId.Clear();
+
+            List<int> values = new List<int>();
+            LLFlights.LLCatchFlightNumber(cmbFrom.Text, cmbTo.Text, dtpDep.Text, values);
+            if (values.Count == 0)
+            {
+                MessageBox.Show("Please change your flight date or location", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+
+                int lineId = values[1];
+                int flightNumber = values[0];
+
+                // added flight hours in a temp list
+
+                LLFlights.LLCatchFlightInfos(hours, prices, flightNo, CaptainName, FlightId, lineId);
+
+                frmFlights fr = new frmFlights();
+                fr.returnflight = dtpReturn.Text;
+                fr.from = cmbTo.Text;
+                fr.to = cmbFrom.Text;
+                int l1 = 20;
+                int l2 = 20;
+                for (int i = 0; i < flightNumber; i++)
                 {
-                    MessageBox.Show("You can not Select a RETURN date before DEPARTURE. PLease choose another date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //create button
+                    Button newbutton = new Button();
+
+                    newbutton.FlatStyle = FlatStyle.Flat;
+                    newbutton.FlatAppearance.BorderColor = Color.LightSeaGreen;
+                    newbutton.FlatAppearance.BorderSize = 3;
+                    newbutton.ForeColor = Color.LightSeaGreen;
+                    newbutton.Font = new Font(newbutton.Font.FontFamily, 14);
+                    newbutton.Location = new Point(l1, l2);
+                    newbutton.Name = "btn" + i;
+                    newbutton.Size = new Size(120, 40);
+                    newbutton.Text = hours[i];
+                    newbutton.UseVisualStyleBackColor = true;
+
+                    newbutton.Click += new EventHandler(this.button_click);
+
+                    fr.Controls.Add(newbutton);
+
+                    // create panel
+                    Panel newpanel = new Panel();
+
+                    newpanel.Size = new Size(675, 2);
+                    newpanel.BackColor = Color.Black;
+                    newpanel.Location = new Point(l1, l2 + 55);
+                    newpanel.Name = "pnl" + i;
+
+                    fr.Controls.Add(newpanel);
+
+                    //crerate label
+                    Label newlabel = new Label();
+                    Font newfont = new Font("Berlin Sans FB", 14);
+                    newlabel.ForeColor = Color.Black;
+                    newlabel.Font = newfont;
+                    newlabel.Location = new Point(l1 + 130, l2 + 10);
+                    newlabel.Name = "lbl" + i;
+                    newlabel.Text = "CAPTAIN: " + CaptainName[i] + " / PRICE: £" + prices[i] + " / FLIGHT NO: " + flightNo[i];
+                    newlabel.AutoSize = true;
+
+                    fr.Controls.Add(newlabel);
+
+
+                    l2 += 70;
 
                 }
-                else
-                {
-                    frmPessengerInfo frret = new frmPessengerInfo();
-
-                    hours.Clear();
-                    prices.Clear();
-                    flightNo.Clear();
-                    CaptainName.Clear();
-                    FlightId.Clear();
-
-                    frret.hours2.Clear();
-                    frret.prices2.Clear();
-                    frret.flightNo2.Clear();
-                    frret.CaptainName2.Clear();
-                    frret.FlightId2.Clear();
-
-                    List<int> values = new List<int>();
-                    List<int> values2 = new List<int>();
-                    LLFlights.LLCatchFlightNumber(cmbFrom, cmbTo, dtpDep, values);
-                    LLFlights.LLCatchFlightNumber(cmbTo, cmbFrom, dtpReturn, values2);
-                    if (values.Count == 0 || values2.Count == 0)
-                    {
-                        MessageBox.Show("Please change your flight date or location", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
-                        
-                        int lineId = values[1];
-                        int lineId2 = values2[1];
-                        int flightNumber = values[0];
-                        frret.flightNumberReturn = values2[0];
-
-                        LLFlights.LLCatchFlightInfos(hours, prices, flightNo, CaptainName, FlightId, lineId);
-                        LLFlights.LLCatchFlightInfos(frret.hours2, frret.prices2, frret.flightNo2, frret.CaptainName2, frret.FlightId2, lineId2);
-                       
-                        frmFlights fr = new frmFlights();
-
-                      
-                        int l1 = 20;
-                        int l2 = 20;
-                        for (int i = 0; i < flightNumber; i++)
-                        {
-                            //create button
-                            Button newbutton = new Button();
-
-                            newbutton.FlatStyle = FlatStyle.Flat;
-                            newbutton.FlatAppearance.BorderColor = Color.LightSeaGreen;
-                            newbutton.FlatAppearance.BorderSize = 3;
-                            newbutton.ForeColor = Color.LightSeaGreen;
-                            newbutton.Font = new Font(newbutton.Font.FontFamily, 14);
-                            newbutton.Location = new Point(l1, l2);
-                            newbutton.Name = "btn" + i;
-                            newbutton.Size = new Size(120, 40);
-                            newbutton.Text = hours[i];
-                            newbutton.UseVisualStyleBackColor = true;
-
-                            newbutton.Click += new EventHandler(this.button_click);
-
-                            fr.Controls.Add(newbutton);
-
-                            // create panel
-                            Panel newpanel = new Panel();
-
-                            newpanel.Size = new Size(675, 2);
-                            newpanel.BackColor = Color.Black;
-                            newpanel.Location = new Point(l1, l2 + 55);
-                            newpanel.Name = "pnl" + i;
-
-                            fr.Controls.Add(newpanel);
-
-                            //crerate label
-                            Label newlabel = new Label();
-                            Font newfont = new Font("Berlin Sans FB", 14);
-                            newlabel.ForeColor = Color.Black;
-                            newlabel.Font = newfont;
-                            newlabel.Location = new Point(l1 + 130, l2 + 10);
-                            newlabel.Name = "lbl" + i;
-                            newlabel.Text = "CAPTAIN: " + CaptainName[i] + " / PRICE: £" + prices[i] + " / FLIGHT NO: " + flightNo[i];
-                            newlabel.AutoSize = true;
-
-                            fr.Controls.Add(newlabel);
 
 
-                            l2 += 70;
+                fr.Show();
 
-                        }
 
-                        fr.Show();
-
-                    }
-                }
 
             }
+
 
         }
 
@@ -305,7 +222,7 @@ namespace PlaneTicket
 
         private void dtpReturn_ValueChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

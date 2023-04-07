@@ -20,6 +20,12 @@ namespace PlaneTicket
             InitializeComponent();
         }
         int greenButtonNo = 0;
+
+        public string returnflight;
+        public string from;
+        public string to;
+        public string firstFlightHour;
+
         void btnCLickColor(Button btn)
         {
             if (btn.BackColor == Color.MistyRose)
@@ -185,15 +191,25 @@ namespace PlaneTicket
         public int tempGuestNo;
         private void btnReserve_Click(object sender, EventArgs e)
         {
+
+
             if(greenButtonNo != tempGuestNo)
             {
                 MessageBox.Show("Please select seats for all pessengers", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
+                
+
+              
+
                 int[] tempSeatNo = new int[12];
                 Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
                 frmPessengerInfo fr = new frmPessengerInfo();
+                fr.returnflight = returnflight;
+                fr.from = from;
+                fr.to = to;
+                fr.firstFlightHour = firstFlightHour;
                 fr.FID = FID;
                 fr.tempGuestNo = tempGuestNo;
                 for (int i = 0; i < btnTemp.Length; i++)
@@ -222,7 +238,7 @@ namespace PlaneTicket
         {
             btnCLickColor(btnS2);
         }
-
+       
         private void btnS1_MouseClick(object sender, MouseEventArgs e)
         {
             btnCLickColor(btnS1);
@@ -230,6 +246,7 @@ namespace PlaneTicket
 
         private void frmSeatPlan_Load(object sender, EventArgs e)
         {
+            
             frmFlights fr = new frmFlights();
             fr.Close();
 

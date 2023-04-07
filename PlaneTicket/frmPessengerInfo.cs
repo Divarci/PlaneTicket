@@ -15,6 +15,8 @@ using TextBox = System.Windows.Forms.TextBox;
 using EntityLayer;
 using LogicLayer;
 using Button = System.Windows.Forms.Button;
+using System.Diagnostics;
+
 
 namespace PlaneTicket
 {
@@ -31,8 +33,7 @@ namespace PlaneTicket
 
         private void frmPessengerInfo_Load(object sender, EventArgs e)
         {
-
-
+           
             ComboBox[] cmbSeat = { cmbS1, cmbS2, cmbS3, cmbS4, cmbS5, cmbS6, cmbS7, cmbS8, cmbS9, cmbS10, cmbS11, cmbS12 };
             TextBox[] txtNames = { txtName1, txtName2, txtName3, txtName4, txtName5, txtName6, txtName7, txtName8, txtName9, txtName10, txtName11, txtName12 };
             TextBox[] txtSurNames = { txtSurname1, txtSurname2, txtSurname3, txtSurname4, txtSurname5, txtSurname6, txtSurname7, txtSurname8, txtSurname9, txtSurname10, txtSurname11, txtSurname12 };
@@ -87,13 +88,20 @@ namespace PlaneTicket
         }
         public string firstFlightHour;
 
-        public List<string> hours2 = new List<string>();
-        public List<string> prices2 = new List<string>();
-        public List<string> flightNo2 = new List<string>();
-        public List<string> CaptainName2 = new List<string>();
-        public List<string> FlightId2 = new List<string>();
+        List<string> hours2 = new List<string>();
+        List<string> prices2 = new List<string>();
+        List<string> flightNo2 = new List<string>();
+        List<string> CaptainName2 = new List<string>();
+        List<string> FlightId2 = new List<string>();
 
-        public int flightNumberReturn;
+        
+        
+        public string returnflight;
+        public string from;
+        public string to;
+
+        public bool situation;
+        
 
         void button_click(object sender, EventArgs e)
         {
@@ -101,7 +109,8 @@ namespace PlaneTicket
 
             frmSeatPlan fr = new frmSeatPlan();
             int temp = 0;
-            if (Convert.ToDateTime(firstFlightHour).TimeOfDay <= Convert.ToDateTime(btn.Text).TimeOfDay)
+            
+            if (Convert.ToDateTime(firstFlightHour).TimeOfDay >= Convert.ToDateTime(btn.Text).TimeOfDay)
             {
                 MessageBox.Show("You should select a flight after your deperture", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -135,11 +144,11 @@ namespace PlaneTicket
                     fr.Show();
                 }
             }
-            
+
         }
         private void btnReserve_Click(object sender, EventArgs e)
         {
-            
+
 
             TextBox[] txtNameBoxes = { txtName1, txtName2, txtName3, txtName4, txtName5, txtName6, txtName7, txtName8, txtName9, txtName10, txtName11, txtName12 };
             TextBox[] txtSurNameBoxes = { txtSurname1, txtSurname2, txtSurname3, txtSurname4, txtSurname5, txtSurname6, txtSurname7, txtSurname8, txtSurname9, txtSurname10, txtSurname11, txtSurname12 };
@@ -182,6 +191,9 @@ namespace PlaneTicket
 
                         }
                     }
+
+
+
                     FlightSearch fr = new FlightSearch();
                     if (fr.whichway)
                     {
@@ -193,16 +205,32 @@ namespace PlaneTicket
                     {
                         MessageBox.Show("You have booked your OUTBOUND flight. Please Click OK to choose INBOUND flight", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        MessageBox.Show(flightNumberReturn.ToString(), "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                       
+                        
 
-                        this.Close();
+                        hours2.Clear();
+                        prices2.Clear();
+                        flightNo2.Clear();
+                        CaptainName2.Clear();
+                        FlightId2.Clear();
+
+                        List<int> values = new List<int>();
+                        LLFlights.LLCatchFlightNumber(from, to, returnflight, values);
+
+
+                        int lineId = values[1];
+                        int flightNumber = values[0];
+
+                        // added flight hours in a temp list
+
+                        LLFlights.LLCatchFlightInfos(hours2, prices2, flightNo2, CaptainName2, FlightId2, lineId);
 
                         frmFlights frfl = new frmFlights();
 
-                       
+
                         int l1 = 20;
                         int l2 = 20;
-                        for (int i = 0; i < flightNumberReturn; i++)
+                        for (int i = 0; i < flightNumber; i++)
                         {
                             //create button
                             Button newbutton = new Button();
@@ -248,7 +276,7 @@ namespace PlaneTicket
                             l2 += 70;
 
                         }
-
+                        this.Close();
                         frfl.Show();
                     }
                 }

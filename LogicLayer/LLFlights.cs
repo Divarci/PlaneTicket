@@ -11,7 +11,7 @@ namespace LogicLayer
 {
     public class LLFlights
     {
-        public static void LLCatchFlightNumber(ComboBox From, ComboBox To, DateTimePicker DepTime, List<int> values)
+        public static void LLCatchFlightNumber(string From, string To, string DepTime, List<int> values)
         {
             DALFlights.CatchFlightNumber(From, To, DepTime, values);
         }

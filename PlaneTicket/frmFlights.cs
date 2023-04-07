@@ -16,12 +16,18 @@ namespace PlaneTicket
         {
             InitializeComponent();
         }
+
+        public string returnflight;
+        public string from;
+        public string to;
+
         public int tempGuestNo;
+        
         private void frmFlights_Load(object sender, EventArgs e)
         {
-
+           
         }
 
-        
+       
     }
 }
