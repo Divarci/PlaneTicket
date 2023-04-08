@@ -30,9 +30,10 @@ namespace PlaneTicket
         public bool whichway;
 
         //still working on it
-        public string tempPessengerName;
-        public string tempPessengerSurname;
-        public string tempPessengerPass;
+        public bool cameFrom = true;
+        public List<string> cameFromPessengerName = new List<string>();
+        public List<string> cameFromPessengerSurName = new List<string>();
+        public List<string> cameFromPessengerPass = new List<string>();
 
         // will be used for algoritm both seat selection and reserve seat
         public int tempGuestNo;
@@ -241,10 +242,11 @@ namespace PlaneTicket
                 fr.whichway = whichway;
                 fr.firstFlightHour = firstFlightHour;
                 //still working on it
-                fr.tempPessengerName = tempPessengerName;
-                fr.tempPessengerSurname = tempPessengerSurname;
-                fr.tempPessengerPass = tempPessengerPass;
-                
+                fr.cameFrom = cameFrom;
+                fr.cameFromPessengerName.AddRange(cameFromPessengerName);
+                fr.cameFromPessengerSurName.AddRange(cameFromPessengerSurName);
+                fr.cameFromPessengerPass.AddRange(cameFromPessengerSurName);
+
                 //send informations for pessenger register
                 fr.FID = FID;
                 fr.tempGuestNo = tempGuestNo;
@@ -269,7 +271,7 @@ namespace PlaneTicket
                         fr.tempSeatNo[y] = tempSeatNo[y];
                     }
                 }
-
+               
                 fr.Show();
                 this.Close();
             }
@@ -279,6 +281,7 @@ namespace PlaneTicket
         //load infos
         private void frmSeatPlan_Load(object sender, EventArgs e)
         {
+            
             // assign infos to the labes
             lblHour.Text = tempHours;
             lblFno.Text = tempFno;

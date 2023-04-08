@@ -34,13 +34,12 @@ namespace PlaneTicket
         public string FID;
         //We received Oneway or return
         public bool whichway;
-        //Will be working on
-        public string tempPessengerName;
-        public string tempPessengerSurname;
-        public string tempPessengerPass;
 
         private void frmPessengerInfo_Load(object sender, EventArgs e)
         {
+
+
+
             //All comboboxes and textboxes assigned to arrays as we will use for loops
             ComboBox[] cmbSeat = { cmbS1, cmbS2, cmbS3, cmbS4, cmbS5, cmbS6, cmbS7, cmbS8, cmbS9, cmbS10, cmbS11, cmbS12 };
             TextBox[] txtNames = { txtName1, txtName2, txtName3, txtName4, txtName5, txtName6, txtName7, txtName8, txtName9, txtName10, txtName11, txtName12 };
@@ -69,7 +68,16 @@ namespace PlaneTicket
                 }
 
             }
+            if (cameFrom == false)
+            {
+                for (int i = 0; i < cameFromPessengerName.Count; i++)
+                {
+                    txtNames[i].Text = cameFromPessengerName[i];
+                    txtSurNames[i].Text = cameFromPessengerSurName[i];
+                    txtPassports[i].Text = cameFromPessengerPass[i];
 
+                }
+            }
 
         }
 
@@ -99,13 +107,22 @@ namespace PlaneTicket
         List<string> flightNo2 = new List<string>();
         List<string> CaptainName2 = new List<string>();
         List<string> FlightId2 = new List<string>();
-
+        //Will be working on
+        public List<string> cameFromPessengerName = new List<string>();
+        public List<string> cameFromPessengerSurName = new List<string>();
+        public List<string> cameFromPessengerPass = new List<string>();
+        /*
+        public string[] cameFromPessengerName = new string[12];
+        public string[] cameFromPessengerSurName = new string[12];
+        public string[] cameFromPessengerPass = new string[12];
+        */
 
         //Needed for return flight
         public string returnflight;
         public string from;
         public string to;
         public string firstFlightHour;
+        public bool cameFrom;
 
 
         //dynamic button actions
@@ -140,9 +157,11 @@ namespace PlaneTicket
                         //it makes bool true and when it came to save pessenger after return flight. algortm calculate it like one way and finish the register
                         fr.whichway = true;
                         //still working on it
-                        fr.tempPessengerName = tempPessengerName;
-                        fr.tempPessengerSurname = tempPessengerSurname;
-                        fr.tempPessengerPass = tempPessengerPass;
+                        fr.cameFrom = false;
+                        fr.cameFromPessengerName.AddRange(cameFromPessengerName);
+                        fr.cameFromPessengerSurName.AddRange(cameFromPessengerSurName);
+                        fr.cameFromPessengerPass.AddRange(cameFromPessengerPass);
+
                     }
 
                 }
@@ -170,6 +189,7 @@ namespace PlaneTicket
             int tempvalue = 0;
             int tempvalue2 = 0;
             //all comboboxes will be matches between eachothers and when loop is finished and if every combobox values are different tempvalue should be 2
+
             for (int i = 0; i < tempGuestNo; i++)
             {
                 for (int y = 0; y < tempGuestNo; y++)
@@ -185,6 +205,7 @@ namespace PlaneTicket
                     tempvalue2++;
                 }
             }
+
             //if we have empty textbox
             if (tempvalue2 > 0)
             {
@@ -209,9 +230,14 @@ namespace PlaneTicket
                         {
                             register(txtNameBoxes[i], txtSurNameBoxes[i], txtPassBoxes[i], SeatBoxes[i]);
                             //sttill working on it
-                            tempPessengerName = txtNameBoxes[i].Text;
-                            tempPessengerSurname = txtSurNameBoxes[i].Text;
-                            tempPessengerPass = txtPassBoxes[i].Text;
+                            if (whichway == false)
+                            {
+                                cameFromPessengerName.Add(txtNameBoxes[i].Text);
+                                cameFromPessengerSurName.Add(txtSurNameBoxes[i].Text);
+                                cameFromPessengerPass.Add(txtPassBoxes[i].Text);
+
+                            }
+
 
                         }
                     }
@@ -246,10 +272,11 @@ namespace PlaneTicket
 
                         frmFlights frfl = new frmFlights();
                         frfl.whichway = true;
-                        frfl.tempPessengerName = tempPessengerName;
-                        frfl.tempPessengerSurname = tempPessengerSurname;
-                        frfl.tempPessengerPass = tempPessengerPass;
-                        MessageBox.Show(whichway.ToString());
+                        frfl.cameFrom = false;
+
+                        frfl.cameFromPessengerName.AddRange(cameFromPessengerName);
+                        frfl.cameFromPessengerSurName.AddRange(cameFromPessengerSurName);
+                        frfl.cameFromPessengerPass.AddRange(cameFromPessengerPass);
 
                         int l1 = 20;
                         int l2 = 20;

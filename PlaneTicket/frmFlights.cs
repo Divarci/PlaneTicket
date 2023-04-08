@@ -25,11 +25,13 @@ namespace PlaneTicket
         //Guest information
         public int tempGuestNo;
 
-        
+
         // strill working on it
-        public string tempPessengerName;
-        public string tempPessengerSurname;
-        public string tempPessengerPass;
+        public bool cameFrom;
+        public List<string> cameFromPessengerName = new List<string>();
+        public List<string> cameFromPessengerSurName = new List<string>();
+        public List<string> cameFromPessengerPass = new List<string>();
+
         private void frmFlights_Load(object sender, EventArgs e)
         {
            
