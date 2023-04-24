@@ -107,7 +107,7 @@ namespace PlaneTicket
         List<string> flightNo2 = new List<string>();
         List<string> CaptainName2 = new List<string>();
         List<string> FlightId2 = new List<string>();
-        //Will be working on
+        //carries info from first flight
         public List<string> cameFromPessengerName = new List<string>();
         public List<string> cameFromPessengerSurName = new List<string>();
         public List<string> cameFromPessengerPass = new List<string>();
@@ -229,7 +229,7 @@ namespace PlaneTicket
                         if (txtNameBoxes[i].Enabled)
                         {
                             register(txtNameBoxes[i], txtSurNameBoxes[i], txtPassBoxes[i], SeatBoxes[i]);
-                            //sttill working on it
+                            //if flight with return
                             if (whichway == false)
                             {
                                 cameFromPessengerName.Add(txtNameBoxes[i].Text);

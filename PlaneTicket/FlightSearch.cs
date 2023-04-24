@@ -53,42 +53,61 @@ namespace PlaneTicket
         public bool whichway;
         private void btnFindCheapFlight_Click(object sender, EventArgs e)
         {
-            //First checks is this fligt one way or with return.
-            if (rbOneway.Checked)
-            {
-                whichway = true;
-            }
-            else
-            {
-                whichway = false;
-            }
-
-            // Then makes cleanin for all list to make a fresh start.
-
+            // First make cleaning for all list to make a fresh start.
             hours.Clear();
             prices.Clear();
             flightNo.Clear();
             CaptainName.Clear();
             FlightId.Clear();
 
-            //After Cleaning Makes a selection of lineId and flightNumbers according to selected departure,target location and flight date and assign them a list which is named values
+            List<int> depValues = new List<int>();
+            List<int> returnValues = new List<int>();
 
-            List<int> values = new List<int>();
-            LLFlights.LLCatchFlightNumber(cmbFrom.Text, cmbTo.Text, dtpDep.Text, values);
+            //Second checks is this fligt one way or with return.
+            if (rbOneway.Checked)
+            {
+                //one-way
+                whichway = true;
+
+                //Makes a selection of lineId and flightNumbers according to selected departure,target location and flight date and assign them a list which is named depValues
+                LLFlights.LLCatchFlightNumber(cmbFrom.Text, cmbTo.Text, dtpDep.Text, depValues);
+            }
+            else
+            {
+                //return
+                whichway = false;
+                //Makes a selection of lineId and flightNumbers according to selected departure,target location and flight date and assign them a list which is named depValues
+                LLFlights.LLCatchFlightNumber(cmbFrom.Text, cmbTo.Text, dtpDep.Text, depValues);
+                //Makes a selection of lineId and flightNumbers according to selected return,target location and flight date and assign them a list which is named returnValues
+                LLFlights.LLCatchFlightNumber(cmbTo.Text, cmbFrom.Text, dtpReturn.Text, returnValues);
+            }
+            
+
 
             // if values comes with 0 item it means there is no flight related to location or date
 
-            if (values.Count == 0)
+            if (depValues.Count == 0)
             {
-                MessageBox.Show("Please change your flight date or location", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please change departure your flight date or location", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
             }
-            else
+            else if (rbReturn.Checked)
+            {
+                // if values comes with 0 item it means there is no return flight related to location or date
+                if (returnValues.Count == 0)
+                {
+                    MessageBox.Show("Please change your return flight date or location", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            // if there is a flight
+            if ((depValues.Count !=0 && rbOneway.Checked) || (depValues.Count !=0 && returnValues.Count !=0) )
             {
 
                 // if there is aflight we assign lineId and flightnumber to variables.
 
-                int lineId = values[1];
-                int flightNumber = values[0];
+                int lineId = depValues[1];
+                int flightNumber = depValues[0];
 
                 // Once we know the flight id we can select all flight infos.
 

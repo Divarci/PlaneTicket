@@ -245,7 +245,7 @@ namespace PlaneTicket
                 fr.cameFrom = cameFrom;
                 fr.cameFromPessengerName.AddRange(cameFromPessengerName);
                 fr.cameFromPessengerSurName.AddRange(cameFromPessengerSurName);
-                fr.cameFromPessengerPass.AddRange(cameFromPessengerSurName);
+                fr.cameFromPessengerPass.AddRange(cameFromPessengerPass);
 
                 //send informations for pessenger register
                 fr.FID = FID;
