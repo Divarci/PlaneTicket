@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer
 {
+    //properties for flight table
     public class EntityFlight
     {
         private int flightLine;

@@ -12,15 +12,19 @@ namespace DALayer
 {
     public class DALLines
     {
+        //sql command for filling combobox depatures
         public static List<string> LineFromList()
         {
+            //create a list
             List<string> values = new List<string>();
+            //query
             SqlCommand cmd = new SqlCommand(" Select DISTINCT (lineFrom) FROM Tbl_Lines", Connection.conn);
+            //check connection status
             if (cmd.Connection.State != ConnectionState.Open)
             {
                 cmd.Connection.Open();
             }
-
+            //add datas to the list
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -35,6 +39,7 @@ namespace DALayer
             return values;
         }
 
+        //sql command for filling combobox destination
 
         public static List<string> LineToList(ComboBox cmb1, ComboBox cmb2)
         {

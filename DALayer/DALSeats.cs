@@ -15,6 +15,7 @@ namespace DALayer
 {
     public class DALSeats
     {
+        //save pessenger using update method
         public static bool DALSeatUpdate(EntitySeats Seats, string FNO, string seatno)
         {
             SqlCommand cmd = new SqlCommand("Update Tbl_Seats set pessengerName=@p1,pessengerSurname=@p2,passportNumber=@p3 where flightId=@p4 and seatNumber=@p5", Connection.conn);
@@ -30,7 +31,7 @@ namespace DALayer
 
             return cmd.ExecuteNonQuery() > 0;
         }
-
+        //assign pessenger names to a list that belongs to a specific flightid
         public static void DALReservedSeats(string FID, List<string> values)
         {
 
@@ -49,6 +50,7 @@ namespace DALayer
             cmd.Connection.Close();
 
         }
+        //counts how many seat is booked
 
         public static List<string> DALSeatInformaion(string FID)
         {

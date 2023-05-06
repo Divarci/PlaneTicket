@@ -29,7 +29,7 @@ namespace PlaneTicket
         public string firstFlightHour;
         public bool whichway;
 
-        //still working on it
+        //keep return flight infos and makes came from true thats because we already booked our departures and that time whichway was false as its a flight with return. now whichway is true as we did our booking and camefrom is true.
         public bool cameFrom = true;
         public List<string> cameFromPessengerName = new List<string>();
         public List<string> cameFromPessengerSurName = new List<string>();
@@ -253,8 +253,9 @@ namespace PlaneTicket
 
                 
                 Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
+                //keeps reserved seat info
                 int[] tempSeatNo = new int[12];
-                //reserved seats assigned new array as its seat number. available seats asre assigned 0
+                //reserved seats assigned new array as its seat number. available seats are assigned 0
                 for (int i = 0; i < btnTemp.Length; i++)
                 {
                     if (btnTemp[i].BackColor == Color.Green)
@@ -290,7 +291,7 @@ namespace PlaneTicket
             //We assigned all buttons(seats) to an array
             Button[] btnTemp = { btnS1, btnS2, btnS3, btnS4, btnS5, btnS6, btnS7, btnS8, btnS9, btnS10, btnS11, btnS12 };
 
-            //we pulled informations which seats are reserved
+            //we pulled informations which seats are reserved before
             List<string> SeatValues = new List<string>();
             LLSeats.ReservedSeats(FID, SeatValues);
 

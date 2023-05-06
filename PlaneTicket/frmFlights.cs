@@ -26,7 +26,7 @@ namespace PlaneTicket
         public int tempGuestNo;
 
 
-        // strill working on it
+        // keeps retun flight info
         public bool cameFrom;
         public List<string> cameFromPessengerName = new List<string>();
         public List<string> cameFromPessengerSurName = new List<string>();

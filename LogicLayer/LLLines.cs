@@ -11,11 +11,12 @@ namespace LogicLayer
 {
     public class LLLines
     {
-
+        //logic layer for filling combobox departures
         public static List<string> LLLineFromList()
         {
             return DALLines.LineFromList();
         }
+        //logic layer for filling combobox destination
 
         public static List<string> LLLineToList(ComboBox cmb1, ComboBox cmb2)
         {

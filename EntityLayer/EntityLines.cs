@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer
 {
+    //properties for lines tabele
     public class EntityLines
     {
         private string From;

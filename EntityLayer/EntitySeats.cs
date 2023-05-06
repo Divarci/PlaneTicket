@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityLayer
 {
+    //seat table props
     public class EntitySeats
     {
         private string pessengerName;

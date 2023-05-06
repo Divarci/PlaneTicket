@@ -38,8 +38,6 @@ namespace PlaneTicket
         private void frmPessengerInfo_Load(object sender, EventArgs e)
         {
 
-
-
             //All comboboxes and textboxes assigned to arrays as we will use for loops
             ComboBox[] cmbSeat = { cmbS1, cmbS2, cmbS3, cmbS4, cmbS5, cmbS6, cmbS7, cmbS8, cmbS9, cmbS10, cmbS11, cmbS12 };
             TextBox[] txtNames = { txtName1, txtName2, txtName3, txtName4, txtName5, txtName6, txtName7, txtName8, txtName9, txtName10, txtName11, txtName12 };
@@ -68,6 +66,7 @@ namespace PlaneTicket
                 }
 
             }
+            //...........
             if (cameFrom == false)
             {
                 for (int i = 0; i < cameFromPessengerName.Count; i++)
@@ -89,7 +88,7 @@ namespace PlaneTicket
 
         void register(TextBox name, TextBox surname, TextBox pass, ComboBox seat)
         {
-            // save pessenger method using Update method 
+            // save pessenger method using Update method to use this update in a loop
             EntitySeats values = new EntitySeats();
 
             values.PessengerName = name.Text;
@@ -111,12 +110,7 @@ namespace PlaneTicket
         public List<string> cameFromPessengerName = new List<string>();
         public List<string> cameFromPessengerSurName = new List<string>();
         public List<string> cameFromPessengerPass = new List<string>();
-        /*
-        public string[] cameFromPessengerName = new string[12];
-        public string[] cameFromPessengerSurName = new string[12];
-        public string[] cameFromPessengerPass = new string[12];
-        */
-
+       
         //Needed for return flight
         public string returnflight;
         public string from;
@@ -156,7 +150,7 @@ namespace PlaneTicket
                         temp = SeatInfo.Count;
                         //it makes bool true and when it came to save pessenger after return flight. algortm calculate it like one way and finish the register
                         fr.whichway = true;
-                        //still working on it
+                        //it send return flight infos to seatplan page
                         fr.cameFrom = false;
                         fr.cameFromPessengerName.AddRange(cameFromPessengerName);
                         fr.cameFromPessengerSurName.AddRange(cameFromPessengerSurName);
@@ -253,6 +247,7 @@ namespace PlaneTicket
                     {
                         MessageBox.Show("You have booked your OUTBOUND flight. Please Click OK to choose INBOUND flight", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                        //same command step with flight search i will only write the different steps explanations
                         hours2.Clear();
                         prices2.Clear();
                         flightNo2.Clear();
@@ -266,14 +261,15 @@ namespace PlaneTicket
                         int lineId = values[1];
                         int flightNumber = values[0];
 
-                        // added flight hours in a temp list
-
+                      
                         LLFlights.LLCatchFlightInfos(hours2, prices2, flightNo2, CaptainName2, FlightId2, lineId);
 
                         frmFlights frfl = new frmFlights();
+                        //normally if we did a one way selection at begining which way selected true otherwise will be false for return, now we did booking for departures and i want algoritm to do every register like one way after this point because departure has been booked and we can consider return flight like a oneway.
                         frfl.whichway = true;
+                        //it has a signal we doing return flight and it help to trigger return flight commands when we lead other pages
                         frfl.cameFrom = false;
-
+                        //they are keeps return flight infos
                         frfl.cameFromPessengerName.AddRange(cameFromPessengerName);
                         frfl.cameFromPessengerSurName.AddRange(cameFromPessengerSurName);
                         frfl.cameFromPessengerPass.AddRange(cameFromPessengerPass);

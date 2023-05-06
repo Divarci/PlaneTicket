@@ -13,11 +13,10 @@ namespace DALayer
 {
     public class DALFlights
     {
-
+        //sql command for line id and flight number for selected flight
         public static void CatchFlightNumber(string from, string to, string deptime, List<int> values)
         {
-            // find totalflightnumber
-
+            
             SqlCommand cmd2 = new SqlCommand("Select * from Tbl_Lines where lineFrom=@p1 and lineTo=@p2 and lineDate=@p3", Connection.conn);
             cmd2.Parameters.AddWithValue("@p1", from);
             cmd2.Parameters.AddWithValue("@p2", to);
@@ -42,6 +41,8 @@ namespace DALayer
 
             Connection.conn.Close();
         }
+        //sql command for flight information for selected flight
+
         public static void CatchFlightInfos(List<string> hours, List<string> prices, List<string> flightNo, List<string> CaptainName, List<string> FlightId, int lineId)
         {
 

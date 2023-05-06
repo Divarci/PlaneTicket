@@ -11,6 +11,8 @@ namespace LogicLayer
 {
     public class LLSeats
     {
+        //save pessenger using update method
+
         public static bool LLSeatUpdate(EntitySeats seats,string FNO,string seatno)
         {
             
@@ -18,12 +20,14 @@ namespace LogicLayer
 
 
         }
+        //assign pessenger names to a list that belongs to a specific flightid
 
         public static void ReservedSeats(string FID, List<string> values)
         {
             DALSeats.DALReservedSeats(FID, values);
 
         }
+        //counts how many seat is booked
         public static List<string> LLSeatInforation(string FID)
         {
             return DALSeats.DALSeatInformaion(FID);

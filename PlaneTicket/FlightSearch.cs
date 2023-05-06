@@ -28,10 +28,11 @@ namespace PlaneTicket
         }
 
 
-        // when form loaded command listed below will be run
+        // when form loaded oneway will be default and departure combobox will be filled
 
         private void FlightSearch_Load(object sender, EventArgs e)
         {
+         
             rbOneway.Checked = true;
             cmbFrom.DataSource = LLLines.LLLineFromList();
         }
@@ -43,6 +44,7 @@ namespace PlaneTicket
             LLLines.LLLineToList(cmbFrom, cmbTo);
         }
 
+        //temporary lists keep the information for selected flights - these datas will be send to other pages
 
         List<string> hours = new List<string>();
         List<string> prices = new List<string>();
@@ -50,20 +52,22 @@ namespace PlaneTicket
         List<string> CaptainName = new List<string>();
         List<string> FlightId = new List<string>();
 
+        //keeps information if there is a return flight
         public bool whichway;
         private void btnFindCheapFlight_Click(object sender, EventArgs e)
         {
-            // First make cleaning for all list to make a fresh start.
+            // First cleaning for temporary list to prevent duplicate for each selection
             hours.Clear();
             prices.Clear();
             flightNo.Clear();
             CaptainName.Clear();
             FlightId.Clear();
 
+            //temporary lists keep values for flight search 
             List<int> depValues = new List<int>();
             List<int> returnValues = new List<int>();
 
-            //Second checks is this fligt one way or with return.
+            //checks if it is this fligt one way or with return.
             if (rbOneway.Checked)
             {
                 //one-way
@@ -104,25 +108,25 @@ namespace PlaneTicket
             if ((depValues.Count !=0 && rbOneway.Checked) || (depValues.Count !=0 && returnValues.Count !=0) )
             {
 
-                // if there is aflight we assign lineId and flightnumber to variables.
+                // if there is aflight we assign lineId and flightnumber to variables just for departure
 
                 int lineId = depValues[1];
                 int flightNumber = depValues[0];
 
-                // Once we know the flight id we can select all flight infos.
+                // Once we know the departure flight id we can select all flight infos.
 
                 LLFlights.LLCatchFlightInfos(hours, prices, flightNo, CaptainName, FlightId, lineId);
 
                 frmFlights fr = new frmFlights();
 
-                // these 4 assigntments will be work if flight with return is  choosen. Othervise values wont effect the result
+                // these 4 assigntments will be work if flight with return is  choosen. Othervise values wont effect the result. main thing here all infos become reverse for return flight
                 fr.returnflight = dtpReturn.Text;
                 fr.from = cmbTo.Text;
                 fr.to = cmbFrom.Text;
                 fr.whichway = whichway;
 
 
-                // these variables for start location values for synamic objects.
+                // these are variables for start location values for synamic objects.
                 int l1 = 20;
                 int l2 = 20;
 
@@ -141,15 +145,16 @@ namespace PlaneTicket
                     newbutton.Location = new Point(l1, l2);
                     newbutton.Name = "btn" + i;
                     newbutton.Size = new Size(120, 40);
+                    // this is why i used a list for flight informations
                     newbutton.Text = hours[i];
                     newbutton.UseVisualStyleBackColor = true;
 
                     //button click action( button_click is designed for this action please look at that)
                     newbutton.Click += new EventHandler(this.button_click);
-
+                    //adds new button to the next page
                     fr.Controls.Add(newbutton);
 
-                    // create panel
+                    // create panel for page design
                     Panel newpanel = new Panel();
 
                     newpanel.Size = new Size(675, 2);
@@ -159,7 +164,7 @@ namespace PlaneTicket
 
                     fr.Controls.Add(newpanel);
 
-                    //crerate label
+                    //crerate label to keep infos in next page
                     Label newlabel = new Label();
                     Font newfont = new Font("Berlin Sans FB", 14);
                     newlabel.ForeColor = Color.Black;
@@ -187,12 +192,12 @@ namespace PlaneTicket
         void button_click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-
+            
             frmSeatPlan fr = new frmSeatPlan();
-
+            //keep how many seat is booked
             int temp = 0;
 
-            // this click action will be used for all new button and i need to send flght informations to seatplan page according to selected flight. That is why i used for loop. it is scanning all flight hours and if clicked button.text equal to the item of Hours list, it means we catch the information of that flight.and i sent all information i would have needed.
+            // this click action will be used for all new button and i need to send flght informations to seatplan page according to selected flight. That is why i used a loop. it is scanning all flight hours and if clicked button.text equal to the item of Hours list, it means we catch the information of that flight.and i sent all information i would have needed.
 
             for (int i = 0; i < hours.Count; i++)
             {
