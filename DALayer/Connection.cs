@@ -10,7 +10,7 @@ namespace DALayer
     public class Connection
     {
 
-        public static SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-56RDTT9\SQLDB;Initial Catalog=TicketBuy;Integrated Security=True");
+        public static SqlConnection conn = new SqlConnection(@"Data Source=HASAN\SQLEXPRESS;Initial Catalog=TicketBuy;Integrated Security=True");
 
     }
 }
